@@ -55,5 +55,8 @@ public class Participant {
 		this.firstname = firstname;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("%s %s [id=%d]", this.firstname, this.lastname, this.id);
+	}
 }

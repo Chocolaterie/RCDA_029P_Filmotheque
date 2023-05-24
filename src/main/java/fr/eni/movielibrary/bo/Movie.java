@@ -144,4 +144,30 @@ public class Movie {
 	public void setActors(List<Participant> actors) {
 		this.actors = actors;
 	}
+	
+	
+	@Override
+	public String toString() {
+		// Prepare affichage directeur
+		String directorString = String.format("Director : %s", director);
+		
+		// Concatenation à la main
+		String actorsString = "Actors : [";
+		int index = 0;
+		for(Participant actor : actors) {
+			if (index > 0) {
+				actorsString += String.format(",\n%s", actor);
+			}
+			else {
+				actorsString += String.format("%s", actor);
+			}
+			index ++;
+		}
+		actorsString += "]";
+		
+		return String.format("Movie [id=%d] \ntitle: %s \nSynopsis: %s \n %s \n %s", this.id, this.title, this.synopsis, directorString, actorsString);
+	
+		// actors toString natif d'une List
+		// return String.format("Movie [id=%d] \ntitle: %s \nSynopsis: %s \n %s \n %s", this.id, this.title, this.synopsis, directorString, actors);
+	}
 }

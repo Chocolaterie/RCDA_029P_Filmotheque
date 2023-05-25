@@ -20,19 +20,39 @@
 
                     <legend class="uk-legend">Formulaire - Film</legend>
 
+                    <!-- Champ de saisie genre -->
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.genre.label}" placeholder="Genre" aria-label="Input">
+                    </div>
+
+                     <!-- Champ de saisie year -->
+                     <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.year}" placeholder="Year" aria-label="Input">
+                    </div>
+
                     <!-- Champ de saisie title -->
                     <div class="uk-margin">
                         <input class="uk-input" type="text" th:field="${movie.title}" placeholder="Title" aria-label="Input">
                     </div>
 
-                    <!-- Champ de saisie year -->
+                    <!-- Champ de saisie realisateur -->
                     <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.year}" placeholder="Year" aria-label="Input">
+                        <input class="uk-input" type="text" th:value="${movie.director.lastname + ' ' + movie.director.firstname}" placeholder="Realisateur" aria-label="Input">
                     </div>
+
+                    <!-- Champ de saisie durée -->
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.duration}" placeholder="Duration" aria-label="Input">
+                    </div>
+
+                    <!-- Champ de acteurs -->
+                    <select class="uk-select" multiple>
+                        <option th:each="actor : ${movie.actors}" th:text="${actor.lastname + ' ' + actor.firstname}"></option>
+                    </select>
 
                     <!-- Champ de saisie synopsis -->
                     <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.synopsis}" placeholder="Synopsis" aria-label="Input">
+                        <textarea class="uk-textarea" th:field="${movie.synopsis}"></textarea>
                     </div>
 
                     <!-- Bouton Submit -->

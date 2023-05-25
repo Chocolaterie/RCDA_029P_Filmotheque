@@ -28,7 +28,7 @@ public class MovieController {
 	@GetMapping("movie/{id}")
 	public String movie(@PathVariable("id") int id, Model model) {
 		
-		// Récupérer une personne mock
+		// Récupérer une film mock
 		Movie movie = movieService.getMovieById(id);
 		
 		// Envoyer dans le model

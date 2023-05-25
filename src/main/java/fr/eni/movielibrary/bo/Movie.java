@@ -161,7 +161,7 @@ public class Movie {
 			else {
 				actorsString += String.format("%s", actor);
 			}
-			index ++;
+			index++;
 		}
 		actorsString += "]";
 		

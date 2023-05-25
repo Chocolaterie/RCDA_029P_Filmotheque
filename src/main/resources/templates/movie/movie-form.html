@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/uikit-3.16.19/css/uikit.min.css" />
+    <script src="/vendor/uikit-3.16.19/js/uikit.min.js"></script>
+    <script src="/vendor/uikit-3.16.19/js/uikit-icons.min.js"></script>
+    <title>Fiche Film</title>
+</head>
+
+<body>
+
+    <section class="uk-section uk-article">
+        <div class="uk-container uk-container-small">
+            <!-- // Formulaire  -->
+            <form action="/movie" method="post" th:object="${formMovie}">
+
+                <fieldset class="uk-fieldset">
+
+                    <legend class="uk-legend">Formulaire - Film</legend>
+
+                    <!-- Champ de saisie title -->
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.title}" placeholder="Title" aria-label="Input">
+                    </div>
+
+                    <!-- Champ de saisie year -->
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.year}" placeholder="Year" aria-label="Input">
+                    </div>
+
+                    <!-- Champ de saisie synopsis -->
+                    <div class="uk-margin">
+                        <input class="uk-input" type="text" th:field="${movie.synopsis}" placeholder="Synopsis" aria-label="Input">
+                    </div>
+
+                    <!-- Bouton Submit -->
+                    <div class="uk-margin" uk-margin>
+                        <button class="uk-button uk-button-default">Submit</button>
+                    </div>
+                
+                </fieldset>
+            </form>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

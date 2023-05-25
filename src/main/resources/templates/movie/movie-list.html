@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/uikit-3.16.19/css/uikit.min.css" />
+    <script src="/vendor/uikit-3.16.19/js/uikit.min.js"></script>
+    <script src="/vendor/uikit-3.16.19/js/uikit-icons.min.js"></script>
+    <title>Accueil</title>
+</head>
+
+<body>
+
+    <section class="uk-section uk-article">
+        <div class="uk-container uk-container-small">
+            <h2 class="uk-text-bold uk-h1 uk-margin-remove-adjacent uk-margin-remove-top">Films</h2>
+            
+            <!-- Layout sous forme de grid -->
+            <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+
+                <!-- Pour chaque personne -->
+                <div th:each="movie : ${movies}">
+                    <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                        <h3 class="uk-card-title" th:text="${movie.title}"></h3>
+                        <p th:text="${movie.genre.label}"></p>
+                        <p th:text="${movie.year}"></p>
+                        <p th:text="'' + ${movie.director.lastname} + '-' +  ${movie.director.firstname}"></p>
+                        <p th:text="${movie.synopsis}"></p>
+                        <!-- Lien pour rediriger sur le form -->
+                        <!-- Exemple du resultat généré : /movie/1 -->
+                        <a th:href="@{'/movie/' + ${movie.id}}">Détail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

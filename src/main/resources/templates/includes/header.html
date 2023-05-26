@@ -10,7 +10,7 @@
 <body>
     <!--HEADER-->
     <header style="background-color: #fff; border-bottom: 1px solid #f2f2f2"
-        data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top">
+        data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top" class="uk-padding-small">
         <div class="uk-container">
             <nav id="navbar" data-uk-navbar="mode: click;">
                 <div class="uk-navbar-left">
@@ -21,8 +21,8 @@
                 <div class="uk-navbar-right">
                     <!-- Block connecté -->
                     <ul th:if="${loggedUser != null}" class="uk-navbar-nav">
-                        <li><p th:text="${'Bienvenue ' + loggedUser.login}"></p></li>
-                        <li><a th:href="@{/logout}" class="uk-button uk-button-default">Deconnexion</a></li>
+                        <li><span th:text="${'Bienvenue ' + loggedUser.login}" class="uk-text-middle"></span></li>
+                        <li><span><a th:href="@{/logout}" class="uk-button uk-button-default">Deconnexion</a></span></li>
                     </ul>
                     <!-- ./Block connecté -->
                     <!-- Block deconnecté -->

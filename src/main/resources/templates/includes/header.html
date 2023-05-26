@@ -1,0 +1,37 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/vendor/uikit-3.16.19/css/uikit.min.css" />
+    <script src="/vendor/uikit-3.16.19/js/uikit.min.js"></script>
+    <script src="/vendor/uikit-3.16.19/js/uikit-icons.min.js"></script>
+    <title>Fiche Personne</title>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header style="background-color: #fff; border-bottom: 1px solid #f2f2f2"
+        data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top">
+        <div class="uk-container">
+            <nav id="navbar" data-uk-navbar="mode: click;">
+                <div class="uk-navbar-left">
+                </div>
+                <div class="uk-navbar-center">
+                    <a class="uk-navbar-item uk-logo" href="#">Filmotheque</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <!-- Block connecté -->
+                    <ul th:if="${loggedUser != null}" class="uk-navbar-nav">
+                        <li><p th:text="${'Bienvenue ' + loggedUser.login}"></p></li>
+                        <li><a th:href="@{/logout}" class="uk-button uk-button-default">Deconnexion</a></li>
+                    </ul>
+                    <!-- ./Block connecté -->
+                    <!-- Block deconnecté -->
+                    <div th:if="${loggedUser == null}">
+                        <a th:href="@{/login}" class="uk-button uk-button-default uk-visible@m">Se Connecter</a>
+                    </div>
+                    <!-- ./Block deconnecté -->
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--/HEADER-->

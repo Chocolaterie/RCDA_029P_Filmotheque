@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.movielibrary.bll.MovieService;
 import fr.eni.movielibrary.bo.Movie;
 
 @Controller
+@SessionAttributes({"loggedUser"})
 public class MovieController {
 
 	@Autowired
@@ -38,7 +40,7 @@ public class MovieController {
 	}
 
 	
-	@GetMapping("movies")
+	@GetMapping("/")
 	public String showMovies(Model model) {		
 		// 1 : Envoyer les données dans le model pour la vue
 		model.addAttribute("movies", movieService.getAllMovies());

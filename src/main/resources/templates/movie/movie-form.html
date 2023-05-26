@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/vendor/uikit-3.16.19/css/uikit.min.css" />
-    <script src="/vendor/uikit-3.16.19/js/uikit.min.js"></script>
-    <script src="/vendor/uikit-3.16.19/js/uikit-icons.min.js"></script>
-    <title>Fiche Film</title>
-</head>
+<!-- Header -->
+<div th:include="includes/header"></div>
 
-<body>
+<!-- Content -->
+<section class="uk-section uk-article">
+    <div class="uk-container uk-container-small">
+        <!-- // Formulaire  -->
+        <form action="/movie" method="post" th:object="${formMovie}">
 
-    <section class="uk-section uk-article">
-        <div class="uk-container uk-container-small">
-            <!-- // Formulaire  -->
-            <form action="/movie" method="post" th:object="${formMovie}">
+            <fieldset class="uk-fieldset">
 
-                <fieldset class="uk-fieldset">
+                <legend class="uk-legend">Formulaire - Film</legend>
 
-                    <legend class="uk-legend">Formulaire - Film</legend>
+                <!-- Champ de saisie genre -->
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" th:field="${movie.genre.label}" placeholder="Genre"
+                        aria-label="Input">
+                </div>
 
-                    <!-- Champ de saisie genre -->
-                    <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.genre.label}" placeholder="Genre" aria-label="Input">
-                    </div>
+                <!-- Champ de saisie year -->
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" th:field="${movie.year}" placeholder="Year" aria-label="Input">
+                </div>
 
-                     <!-- Champ de saisie year -->
-                     <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.year}" placeholder="Year" aria-label="Input">
-                    </div>
+                <!-- Champ de saisie title -->
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" th:field="${movie.title}" placeholder="Title"
+                        aria-label="Input">
+                </div>
 
-                    <!-- Champ de saisie title -->
-                    <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.title}" placeholder="Title" aria-label="Input">
-                    </div>
+                <!-- Champ de saisie realisateur -->
+                <div class="uk-margin">
+                    <input class="uk-input" type="text"
+                        th:value="${movie.director.lastname + ' ' + movie.director.firstname}" placeholder="Realisateur"
+                        aria-label="Input">
+                </div>
 
-                    <!-- Champ de saisie realisateur -->
-                    <div class="uk-margin">
-                        <input class="uk-input" type="text" th:value="${movie.director.lastname + ' ' + movie.director.firstname}" placeholder="Realisateur" aria-label="Input">
-                    </div>
+                <!-- Champ de saisie durée -->
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" th:field="${movie.duration}" placeholder="Duration"
+                        aria-label="Input">
+                </div>
 
-                    <!-- Champ de saisie durée -->
-                    <div class="uk-margin">
-                        <input class="uk-input" type="text" th:field="${movie.duration}" placeholder="Duration" aria-label="Input">
-                    </div>
+                <!-- Champ de acteurs -->
+                <select class="uk-select" multiple>
+                    <option th:each="actor : ${movie.actors}" th:text="${actor.lastname + ' ' + actor.firstname}">
+                    </option>
+                </select>
 
-                    <!-- Champ de acteurs -->
-                    <select class="uk-select" multiple>
-                        <option th:each="actor : ${movie.actors}" th:text="${actor.lastname + ' ' + actor.firstname}"></option>
-                    </select>
+                <!-- Champ de saisie synopsis -->
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" th:field="${movie.synopsis}"></textarea>
+                </div>
 
-                    <!-- Champ de saisie synopsis -->
-                    <div class="uk-margin">
-                        <textarea class="uk-textarea" th:field="${movie.synopsis}"></textarea>
-                    </div>
+                <!-- Bouton Submit -->
+                <div class="uk-margin" uk-margin>
+                    <button class="uk-button uk-button-default">Submit</button>
+                </div>
 
-                    <!-- Bouton Submit -->
-                    <div class="uk-margin" uk-margin>
-                        <button class="uk-button uk-button-default">Submit</button>
-                    </div>
-                
-                </fieldset>
-            </form>
+            </fieldset>
+        </form>
 
-        </div>
-    </section>
-
-</body>
+    </div>
+</section>
+<!-- ./Content -->
+<!-- Footer -->
+<div th:include="includes/footer"></div>
 
 </html>

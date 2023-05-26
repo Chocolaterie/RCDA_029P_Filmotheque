@@ -13,6 +13,11 @@ public class Member {
 	
 	protected List<Review> reviews;
 
+	public Member() {
+		login = "";
+		password = "";
+	}
+	
 	/**
 	 * @param id
 	 * @param lastname

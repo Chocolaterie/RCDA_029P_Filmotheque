@@ -46,7 +46,7 @@ public class MovieController {
 		// Envoyer dans le model
 		model.addAttribute("movie", movie);
 		
-		return "movie/movie-form";
+		return "movie/movie-detail";
 	}
 	
 	/**

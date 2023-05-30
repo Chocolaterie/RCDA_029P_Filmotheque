@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Header -->
+<div th:include="includes/header"></div>
+
+<!-- Content -->
+<section class="uk-section uk-article">
+    <div class="uk-container uk-container-small">
+
+        <h2 class="uk-article-title" th:text="${movie.title}"></h2>
+
+        <div class="uk-flex uk-flex-wrap uk-flex-wrap-around">
+            <div class="uk-width-1-3">
+                <img src="/img/Sharknado_2.png" />
+            </div>
+
+            <div class="uk-width-1-2 uk-margin-left">
+                <!--AUTHOR-->
+                <section class="uk-section uk-section-small">
+                    <div id="author-wrap" class="uk-container uk-container-small">
+                        <div class="uk-width-expand">
+                            <h4 class="uk-margin-remove uk-text-bold"
+                                th:text="${movie.director.lastname + ' ' + movie.director.firstname}"></h4>
+                            <span class="uk-text-small uk-text-muted" th:text="${'Année de sortie :' + movie.year}"></span>
+                            <p th:text="${'Genre :' + movie.genre.label}"></p>
+                            <p th:text="${'Durée du film :' + movie.duration}"></p>
+                            <p th:text="${movie.synopsis}"></p>
+                        </div>
+                    </div>
+                </section>
+                <!--/AUTHOR-->
+            </div>
+        </div>
+
+        <h2 class="uk-article-title">Acteurs</h2>
+        <div uk-grid style="padding-top: 1rem">
+            <div th:each="actor : ${movie.actors}" class="uk-width-1-4">
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <img src="/img/actor_profil.png" width="200" height="400" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title" th:text="${actor.lastname + ' ' + actor.firstname}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ./Content -->
+<!-- Footer -->
+<div th:include="includes/footer"></div>
+
+</html>

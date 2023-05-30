@@ -5,6 +5,7 @@ import java.util.List;
 import fr.eni.movielibrary.bo.Genre;
 import fr.eni.movielibrary.bo.Movie;
 import fr.eni.movielibrary.bo.Participant;
+import fr.eni.movielibrary.bo.ServiceResult;
 
 public interface MovieService {
 
@@ -20,7 +21,7 @@ public interface MovieService {
 	
 	public Participant getParticipantById(long id);
 	
-	public void saveMovie(Movie movie);
+	public ServiceResult addMovie(Movie movie);
 	
 	
 }

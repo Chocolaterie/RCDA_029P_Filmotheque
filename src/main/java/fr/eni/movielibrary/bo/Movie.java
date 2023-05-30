@@ -35,6 +35,10 @@ public class Movie {
 		this.synopsis = synopsis;
 	}
 
+	public Movie() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * @return the id
 	 */

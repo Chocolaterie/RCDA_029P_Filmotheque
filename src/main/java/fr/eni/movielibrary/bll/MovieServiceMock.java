@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import fr.eni.movielibrary.bo.Genre;
 import fr.eni.movielibrary.bo.Movie;
 import fr.eni.movielibrary.bo.Participant;
+import fr.eni.movielibrary.bo.ServiceResult;
 
 @Service
 @Profile("dev")
@@ -128,7 +129,24 @@ public class MovieServiceMock implements MovieService {
 	}
 
 	@Override
-	public void saveMovie(Movie movie) {
-		lstMovies.add(movie);
+	public ServiceResult addMovie(Movie movie) {
+		// Preparer le resultat du traitement 
+		ServiceResult result = new ServiceResult();
+		
+		// Erreur : durée invalide
+		if (movie.getDuration() < 1) {
+			result.addError("La durée doit être supérieur à 0");
+		}
+		// Erreur : Synopsis invalide
+		if (!(movie.getSynopsis().length() >= 20 && movie.getSynopsis().length() <= 250)) {
+			result.addError("La Synopsis doit faire entre 20 et 250 caractères");
+		}
+			
+		// Ajouter dans la liste le film
+		if (result.isValid()) {
+			lstMovies.add(movie);
+		}
+		
+		return result;
 	}
 }

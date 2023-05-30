@@ -60,6 +60,12 @@ public class MovieController {
 		// Envoyer dans le model
 		model.addAttribute("movie", new Movie());
 		
+		// Envoyer la liste des genres
+		model.addAttribute("genreOptions", movieService.getGenres());
+		
+		// Envoyer la liste des participants
+		model.addAttribute("participantOptions", movieService.getParticipants());
+		
 		return "movie/movie-form";
 	}
 	

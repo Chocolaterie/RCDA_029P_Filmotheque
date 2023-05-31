@@ -3,19 +3,36 @@ package fr.eni.movielibrary.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Movie {
 
 	protected long id;
+	
+	@NotBlank
 	protected String title;
+	
+	@Min(value = 1)
 	protected int year;
+	
+	@Min(value = 1)
 	protected int duration;
+	
+	@NotBlank
+	@Size(min=20, max=250)
 	protected String synopsis;
 	
 	// --
+	@NotNull
 	protected Genre genre;
 	// --
 	protected List<Review> reviews;
 	//--
+	@NotNull
 	protected Participant director;
 	protected List<Participant> actors;
 	

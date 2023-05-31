@@ -31,6 +31,11 @@
                 <div class="uk-margin">
                     <div class="uk-form-label">Titre</div>
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ title -->
+                        <ul th:if="${#fields.hasErrors('title')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('title')}" th:text="${error}">
+                            </li>
+                        </ul>
                         <input class="uk-input" type="text" th:field="${movie.title}" placeholder="Title"
                             aria-label="Input">
                     </div>
@@ -39,7 +44,13 @@
                 <!-- Champ de saisie year -->
                 <div class="uk-margin">
                     <div class="uk-form-label">Année</div>
+
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ année -->
+                        <ul th:if="${#fields.hasErrors('year')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('year')}" th:text="${error}">
+                            </li>
+                        </ul>
                         <input class="uk-input" type="number" th:field="${movie.year}" placeholder="Year"
                             aria-label="Input">
                     </div>
@@ -49,6 +60,12 @@
                 <div class="uk-margin">
                     <div class="uk-form-label">Realisateur</div>
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ director -->
+                        <ul th:if="${#fields.hasErrors('director')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('director')}"
+                                th:text="${error}">
+                            </li>
+                        </ul>
                         <select class="uk-select" th:field="${movie.director}">
                             <option th:each="participant : ${participantOptions}" th:value="${participant.id}"
                                 th:text="${participant.lastname + ' ' + participant.firstname}"></option>
@@ -60,6 +77,12 @@
                 <div class="uk-margin">
                     <div class="uk-form-label">Durée</div>
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ année -->
+                        <ul th:if="${#fields.hasErrors('duration')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('duration')}"
+                                th:text="${error}">
+                            </li>
+                        </ul>
                         <input class="uk-input" type="number" th:field="${movie.duration}" placeholder="Duration"
                             aria-label="Input">
                     </div>
@@ -69,9 +92,14 @@
                 <div class="uk-margin">
                     <div class="uk-form-label">Genre</div>
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ director -->
+                        <ul th:if="${#fields.hasErrors('genre')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('genre')}" th:text="${error}">
+                            </li>
+                        </ul>
                         <select class="uk-select" th:field="${movie.genre}">
-                            <option th:each="genre : ${genreOptions}" th:value=${genre.id}
-                                th:text="${genre.label}"></option>
+                            <option th:each="genre : ${genreOptions}" th:value=${genre.id} th:text="${genre.label}">
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -80,6 +108,11 @@
                 <div class="uk-margin">
                     <div class="uk-form-label">Synopsis</div>
                     <div class="uk-form-controls">
+                        <!-- Les erreurs du champ synopsis -->
+                        <ul th:if="${#fields.hasErrors('synopsis')}">
+                            <li class="uk-form-danger" th:each="error : ${#fields.errors('synopsis')}"
+                                th:text="${error}"></li>
+                        </ul>
                         <textarea class="uk-textarea" th:field="${movie.synopsis}"></textarea>
                     </div>
                 </div>

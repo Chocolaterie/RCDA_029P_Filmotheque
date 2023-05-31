@@ -1,11 +1,16 @@
 package fr.eni.movielibrary.ihm;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +23,7 @@ import fr.eni.movielibrary.bo.Review;
 import fr.eni.movielibrary.bo.ServiceResult;
 
 @Controller
-@SessionAttributes({"loggedUser"})
-public class MovieController {
+public class MovieController extends EniController {
 
 	@Autowired
 	MovieService movieService;
@@ -60,6 +64,10 @@ public class MovieController {
 	 */
 	@GetMapping("create-movie")
 	public String createMovie(Model model) {
+		// Si je suis pas connecté alors je redirige sur login
+		if (!isLogged(model)) {
+			return "redirect:/login";
+		}
 		
 		// Envoyer dans le model
 		model.addAttribute("movie", new Movie());
@@ -74,18 +82,32 @@ public class MovieController {
 	}
 	
 	@PostMapping("create-movie")
-	public String createMovie(@ModelAttribute("movie") Movie movie, Model model) {
-		// Appeler le service ajouter le film
-		ServiceResult result = movieService.addMovie(movie);
-		
-		// Si le traitement est ok
-		if (result.isValid()) {
-			// Redirection
-			return "redirect:/";
+	public String createMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
+	
+		// Si je suis pas connecté alors je redirige sur login
+		if (!isLogged(model)) {
+			return "redirect:/login";
 		}
-		// Sinon
-		// -- Envoyer le message d'erreur dans la vue
-		model.addAttribute("errors", result.getErrors());
+				
+		// Envoyer la liste des genres
+		model.addAttribute("genreOptions", movieService.getGenres());
+		
+		// Envoyer la liste des participants
+		model.addAttribute("participantOptions", movieService.getParticipants());
+		
+		// 1 :: Controle de surface (formulaire)
+		if (!bindingResult.hasErrors()) {
+			// Appeler le service ajouter le film
+			ServiceResult result = movieService.addMovie(movie);
+			
+			// 2 :: Metier - Si le traitement est ok
+			if (result.isValid()) {
+				// Redirection
+				return "redirect:/";
+			}
+			// -- Envoyer le message d'erreur dans la vue
+			model.addAttribute("errors", result.getErrors());
+		}
 		
 		// -- Afficher le formulaire
 		return "movie/movie-form";
@@ -101,7 +123,12 @@ public class MovieController {
 	}
 	
 	@PostMapping("add-review/{id}")
-	public String createMovie(@PathVariable("id") int id, @ModelAttribute("review") Review review, Model model) {
+	public String addReview(@PathVariable("id") int id, @ModelAttribute("review") Review review, Model model) {
+		// Si je suis pas connecté alors je redirige sur login
+		if (!isLogged(model)) {
+			return "redirect:/login";
+		}
+				
 		// Récupérer
 		ServiceResult result = movieService.addReview(review, id);
 		

@@ -138,6 +138,16 @@ public class MovieServiceMock implements MovieService {
 		// Preparer le resultat du traitement 
 		ServiceResult result = new ServiceResult();
 		
+		// Erreur : Realisateur incorrect
+		if (movie.getDirector() == null) {
+			result.addError("Vous devez renseigner un(e) Réalisateur/Réalisatrice");
+		}
+		
+		// Erreur : Realisateur incorrect
+		if (movie.getGenre() == null) {
+			result.addError("Vous devez renseigner genre");
+		}
+		
 		// Erreur : durée invalide
 		if (movie.getDuration() < 1) {
 			result.addError("La durée doit être supérieur à 0");

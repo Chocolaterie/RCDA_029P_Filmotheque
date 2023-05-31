@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.movielibrary.bll.MovieService;
 import fr.eni.movielibrary.bo.Movie;
+import fr.eni.movielibrary.bo.Review;
 import fr.eni.movielibrary.bo.ServiceResult;
 
 @Controller
@@ -45,6 +46,9 @@ public class MovieController {
 		
 		// Envoyer dans le model
 		model.addAttribute("movie", movie);
+		
+		// Preparer la model de donnée pour une review
+		model.addAttribute("review", new Review());
 		
 		return "movie/movie-detail";
 	}
@@ -86,7 +90,6 @@ public class MovieController {
 		// -- Afficher le formulaire
 		return "movie/movie-form";
 	}
-
 	
 	@GetMapping("/")
 	public String showMovies(Model model) {		
@@ -95,5 +98,23 @@ public class MovieController {
 		
 		// 2 : Retourner la vue
 		return "movie/movie-list";
+	}
+	
+	@PostMapping("add-review/{id}")
+	public String createMovie(@PathVariable("id") int id, @ModelAttribute("review") Review review, Model model) {
+		// Récupérer
+		ServiceResult result = movieService.addReview(review, id);
+		
+		// Si on trouve le film
+		if (result.isValid()) {
+			
+			// -- Redirigier sur le film
+			return String.format("redirect:/movie/%d", id);
+		}
+	
+		// Erreur
+		System.out.println(String.format("Erreurs : %s", result.getErrors()));
+		
+		return String.format("redirect:/");
 	}
 }

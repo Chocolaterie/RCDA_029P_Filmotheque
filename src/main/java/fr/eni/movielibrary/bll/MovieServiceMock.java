@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import fr.eni.movielibrary.bo.Genre;
 import fr.eni.movielibrary.bo.Movie;
 import fr.eni.movielibrary.bo.Participant;
+import fr.eni.movielibrary.bo.Review;
 import fr.eni.movielibrary.bo.ServiceResult;
 
 @Service
@@ -66,6 +67,10 @@ public class MovieServiceMock implements MovieService {
 		jurassicPark.setGenre(lstGenres.get(1));
 		jurassicPark.setDirector(stevenSpielberg);
 		jurassicPark.setActors(actorsJurassicPark);
+		//--
+		jurassicPark.addReview(new Review(1, 4, "Trop fort les dinos"));
+		jurassicPark.addReview(new Review(1, 1, "La scene avec goldblum et la tonne de ***** bof bof"));
+		//
 		lstMovies.add(jurassicPark);
 
 		Movie theFly = new Movie(2, "The Fly", 1986, 95,
@@ -145,6 +150,46 @@ public class MovieServiceMock implements MovieService {
 		// Ajouter dans la liste le film
 		if (result.isValid()) {
 			lstMovies.add(movie);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void saveMovie(Movie movie) {
+		// Chercher l'index
+		int index = 0;
+		int indexToEdit = -1;
+		for (Movie currentMovie : lstMovies) {
+			// Si le slug correspond à la personne renseigné
+			if (currentMovie.getId() == movie.getId()) {
+				indexToEdit = index;
+			}
+			index++;
+		}
+		
+		// Modifier depuis l'index
+		if (indexToEdit > -1) {
+			lstMovies.set(indexToEdit, movie);
+		}
+	}
+
+	@Override
+	public ServiceResult addReview(Review review, int movieId) {
+		ServiceResult result = new ServiceResult();
+		
+		// Récupérer
+		Movie movie = getMovieById(movieId);
+		
+		// Si on trouve le film
+		if (movie != null) {
+			// Ajouter la review
+			movie.addReview(review);
+			
+			// Sauvegarder le film
+			saveMovie(movie);
+		} else {
+			result.addError("Le film n'existe pas");
 		}
 		
 		return result;

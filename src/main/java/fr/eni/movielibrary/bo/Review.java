@@ -21,6 +21,9 @@ public class Review {
 		this.comment = comment;
 	}
 	
+	public Review() {
+	}
+
 	/**
 	 * @return the id
 	 */

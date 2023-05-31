@@ -21,7 +21,8 @@
                         <div class="uk-width-expand">
                             <h4 class="uk-margin-remove uk-text-bold"
                                 th:text="${movie.director.lastname + ' ' + movie.director.firstname}"></h4>
-                            <span class="uk-text-small uk-text-muted" th:text="${'Année de sortie :' + movie.year}"></span>
+                            <span class="uk-text-small uk-text-muted"
+                                th:text="${'Année de sortie :' + movie.year}"></span>
                             <p th:text="${'Genre :' + movie.genre.label}"></p>
                             <p th:text="${'Durée du film :' + movie.duration}"></p>
                             <p th:text="${movie.synopsis}"></p>
@@ -32,6 +33,7 @@
             </div>
         </div>
 
+        <!-- Zone ACTEURS  -->
         <h2 class="uk-article-title">Acteurs</h2>
         <div uk-grid style="padding-top: 1rem">
             <div th:each="actor : ${movie.actors}" class="uk-width-1-4">
@@ -45,6 +47,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Zone REVIEW  -->
+        <h2 class="uk-article-title">Review</h2>
+        <!-- Formulaire add review -->
+        <div class="uk-card uk-card-default uk-card-body">
+            <form class="uk-form" th:action="@{'/add-review/' + ${movie.id}}" method="post">
+                <!-- Champ de la note -->
+                <div class="uk-margin">
+                    <div class="uk-form-label">Note</div>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="number" th:field="${review.rating}" placeholder="Year"
+                            aria-label="Input">
+                    </div>
+                </div>
+                <!-- Champ de saisie comment -->
+                <div class="uk-margin">
+                    <div class="uk-form-label">Commentaire</div>
+                    <div class="uk-form-controls">
+                        <textarea class="uk-textarea" th:field="${review.comment}"></textarea>
+                    </div>
+                </div>
+                <!-- Bouton Submit -->
+                <div class="uk-margin" uk-margin>
+                    <button class="uk-button uk-button-default">Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <hr></hr>
+
+        <ul class="uk-comment-list">
+            <!-- Pour chaque review -->
+            <li th:each="review : ${movie.reviews}">
+                <article class="uk-comment uk-visible-toggle" tabindex="-1" role="comment">
+                    <header class="uk-comment-header uk-position-relative">
+                        <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                            <div class="uk-width-auto">
+                                <img class="uk-comment-avatar" src="/img/comment_mock.png" width="80" height="80"
+                                    alt="">
+                            </div>
+                            <div class="uk-width-expand">
+                                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset"
+                                        href="#">Author</a>
+                                </h4>
+                                <p class="uk-comment-meta uk-margin-remove-top"><a class="uk-link-reset" href="#"
+                                        th:text="${review.rating + '/5'}"></a></p>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <p th:text="${review.comment}"></p>
+                    </div>
+                </article>
+            </li>
+        </ul>
 
     </div>
 </section>

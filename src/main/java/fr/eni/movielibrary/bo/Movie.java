@@ -1,5 +1,6 @@
 package fr.eni.movielibrary.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
@@ -33,10 +34,11 @@ public class Movie {
 		this.year = year;
 		this.duration = duration;
 		this.synopsis = synopsis;
+		reviews = new ArrayList<Review>();
 	}
 
 	public Movie() {
-		// TODO Auto-generated constructor stub
+		reviews = new ArrayList<Review>();
 	}
 
 	/**
@@ -149,6 +151,13 @@ public class Movie {
 		this.actors = actors;
 	}
 	
+	/**
+	 * Ajouter une note
+	 * @param review
+	 */
+	public void addReview(Review review) {
+		reviews.add(review);
+	}
 	
 	@Override
 	public String toString() {

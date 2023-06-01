@@ -33,8 +33,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            cd /chemin/vers/votre/application
-            sudo systemctl stop votre-application
+            cd movie-library  # Répertoire du projet
+            sudo systemctl stop movie-library
             rm -rf *
-            cp target/votre-application.jar .
-            sudo systemctl start votre-application
+            cp target/movie-library.jar .
+            sudo systemctl start movie-library

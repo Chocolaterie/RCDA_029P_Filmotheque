@@ -14,6 +14,10 @@ public class Genre {
 	
 	protected String label;
 	
+	public Genre() {
+		
+	}
+	
 	/**
 	 * @param id
 	 * @param label

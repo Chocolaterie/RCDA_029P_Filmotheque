@@ -1,5 +1,6 @@
 package fr.eni.movielibrary.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class Member {
 	public Member() {
 		login = ""; 
 		password = "";
+		reviews = new ArrayList<Review>();
 	}
 	
 	/**

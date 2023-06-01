@@ -1,5 +1,6 @@
 package fr.eni.movielibrary.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,6 +21,9 @@ public class Participant {
 	@ManyToMany(mappedBy ="actors")
 	List<Movie> actorMovies;
 	
+	public Participant() {
+		actorMovies = new ArrayList<Movie>();
+	}
 	/**
 	 * @param id
 	 * @param lastname

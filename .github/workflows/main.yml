@@ -19,6 +19,9 @@ jobs:
       - name: Clonage du dépôt
         uses: actions/checkout@v2
 
+      - name: Set execute permissions for gradlew
+        run: chmod +x ./gradlew
+
       - name: Compilation et construction de l'application
         run: |
           ./gradlew clean build

@@ -1,0 +1,36 @@
+name: Déploiement de l'application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Vérification de l'application Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Clonage du dépôt
+        uses: actions/checkout@v2
+
+      - name: Compilation et construction de l'application
+        run: |
+          ./gradlew clean build
+
+      - name: Déploiement de l'application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd /chemin/vers/votre/application
+            sudo systemctl stop votre-application
+            rm -rf *
+            cp target/votre-application.jar .
+            sudo systemctl start votre-application

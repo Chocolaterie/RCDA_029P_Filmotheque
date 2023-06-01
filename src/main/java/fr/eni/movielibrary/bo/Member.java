@@ -2,8 +2,18 @@ package fr.eni.movielibrary.bo;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Member {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected long id;
 	protected String lastname;
 	protected String firstname;
@@ -11,10 +21,12 @@ public class Member {
 	protected String password;
 	protected boolean isAdmin;
 	
+	@OneToMany()
+	@JoinColumn(name="member_id")
 	protected List<Review> reviews;
-
+ 
 	public Member() {
-		login = "";
+		login = ""; 
 		password = "";
 	}
 	

@@ -1,12 +1,26 @@
 package fr.eni.movielibrary.bo;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+@Entity
 public class Review {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected long id;
 	protected int rating;
 	protected String comment;
 	
+	@ManyToOne()
 	protected Member membre;
+	
+	@ManyToOne()
 	protected Movie movie;
 	
 	/**

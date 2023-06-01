@@ -1,10 +1,17 @@
 package fr.eni.movielibrary.bo;
 
+import java.util.List;
+
+import javax.persistence.ManyToMany;
+
 public class Participant {
 
 	protected long id;
 	protected String lastname;
 	protected String firstname;
+	
+	@ManyToMany(mappedBy ="actors")
+	List<Movie> actorMovies;
 	
 	/**
 	 * @param id

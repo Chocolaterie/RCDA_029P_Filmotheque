@@ -3,6 +3,7 @@ package fr.eni.movielibrary.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -34,6 +35,8 @@ public class Movie {
 	//--
 	@NotNull
 	protected Participant director;
+	
+	@ManyToMany()
 	protected List<Participant> actors;
 	
 	/**
